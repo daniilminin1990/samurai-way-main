@@ -12,6 +12,8 @@ type AppProps = {
   messagesData: Array<MessagesDataProps>
 }
 
+let ProfileComponent = () => <Profile />
+
 function App(props: AppProps) {
   return (
     <BrowserRouter>
@@ -21,7 +23,7 @@ function App(props: AppProps) {
         <div className='app-wrapper-content'>
           <Route path='/dialogs' render={() => <Dialogs dialogsData={props.dialogsData} messagesData={props.messagesData} />} />
           {/* <Route path='/dialogs' component={Dialogs} /> */}
-          <Route path='/profile' render={() => <Profile />} />
+          <Route path='/profile' component={ProfileComponent} />
           {/* <Route path='/profile' component={Profile} /> */}
         </div>
       </div>
