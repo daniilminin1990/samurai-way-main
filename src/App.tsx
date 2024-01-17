@@ -5,16 +5,24 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from './components/Dialogs/Dialogs';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { DialogsDataProps, MessagesDataProps } from './index';
 
-function App() {
+type AppProps = {
+  dialogsData: Array<DialogsDataProps>
+  messagesData: Array<MessagesDataProps>
+}
+
+function App(props: AppProps) {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Route path='/dialogs' component={Dialogs} />
-          <Route path='/profile' component={Profile} />
+          <Route path='/dialogs' render={() => <Dialogs dialogsData={props.dialogsData} messagesData={props.messagesData} />} />
+          {/* <Route path='/dialogs' component={Dialogs} /> */}
+          <Route path='/profile' render={() => <Profile />} />
+          {/* <Route path='/profile' component={Profile} /> */}
         </div>
       </div>
     </BrowserRouter>

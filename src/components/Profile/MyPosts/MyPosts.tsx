@@ -1,7 +1,7 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import { MessagesDataProps } from "../../Dialogs/Dialogs";
+import { MessagesDataProps } from "../../../index";
 
 type PostsDataProps = MessagesDataProps & {
   likesCount: number
