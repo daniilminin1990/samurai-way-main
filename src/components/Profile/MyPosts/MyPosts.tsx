@@ -1,7 +1,7 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import { MessagesDataProps, PostsDataProps } from "../../../index";
+import { PostsDataProps } from "../../../redux/state";
 
 type MyPostsProps = {
   postsData: PostsDataProps[],
