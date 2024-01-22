@@ -2,17 +2,18 @@ import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Profile/Profile";
+import Profile, { ProfileProps } from "./components/Profile/Profile";
 import Dialogs from './components/Dialogs/Dialogs';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { DialogsDataProps, MessagesDataProps } from './index';
+import { DialogsDataProps, MessagesDataProps, PostsDataProps } from './index';
 
 type AppProps = {
   dialogsData: Array<DialogsDataProps>
   messagesData: Array<MessagesDataProps>
+  postsData: PostsDataProps[]
 }
 
-let ProfileComponent = () => <Profile />
+// let ProfileComponent = (props: AppProps) => <Profile postsData={props.postsData} />
 
 function App(props: AppProps) {
   return (
@@ -23,7 +24,7 @@ function App(props: AppProps) {
         <div className='app-wrapper-content'>
           <Route path='/dialogs' render={() => <Dialogs dialogsData={props.dialogsData} messagesData={props.messagesData} />} />
           {/* <Route path='/dialogs' component={Dialogs} /> */}
-          <Route path='/profile' component={ProfileComponent} />
+          <Route path='/profile' render={() => <Profile postsData={props.postsData} />} />
           {/* <Route path='/profile' component={Profile} /> */}
         </div>
       </div>

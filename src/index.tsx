@@ -13,6 +13,10 @@ export type MessagesDataProps = {
   message: string
 }
 
+export type PostsDataProps = MessagesDataProps & {
+  likesCount: number
+}
+
 let dialogsData: Array<DialogsDataProps> = [
   { id: '1', name: 'Ilya', },
   { id: '2', name: 'Oleg', },
@@ -31,7 +35,14 @@ let messagesData: Array<MessagesDataProps> = [
   { id: '6', message: 'Konichua', },
 ]
 
+let postsData: Array<PostsDataProps> = [
+  { id: '1', message: 'Hi. how are you?', likesCount: 12 },
+  { id: '2', message: 'It\'s my first post', likesCount: 1 },
+  { id: '2', message: 'It\'s my BDay', likesCount: 20 },
+  { id: '2', message: 'It\'s me', likesCount: 114 },
+]
+
 ReactDOM.render(
-  <App dialogsData={dialogsData} messagesData={messagesData} />,
+  <App dialogsData={dialogsData} messagesData={messagesData} postsData={postsData} />,
   document.getElementById('root')
 );

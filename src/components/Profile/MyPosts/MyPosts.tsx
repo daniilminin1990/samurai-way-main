@@ -1,20 +1,24 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import { MessagesDataProps } from "../../../index";
+import { MessagesDataProps, PostsDataProps } from "../../../index";
 
-type PostsDataProps = MessagesDataProps & {
-  likesCount: number
+type MyPostsProps = {
+  postsData: PostsDataProps[],
 }
 
-const MyPosts = () => {
+const MyPosts = (props: MyPostsProps) => {
 
-  let postsData: Array<PostsDataProps> = [
-    { id: '1', message: 'Hi. how are you?', likesCount: 12 },
-    { id: '2', message: 'It\'s my first post', likesCount: 1 },
-  ]
+  // let postsData: Array<PostsDataProps> = [
+  //   { id: '1', message: 'Hi. how are you?', likesCount: 12 },
+  //   { id: '2', message: 'It\'s my first post', likesCount: 1 },
+  //   { id: '2', message: 'It\'s my BDay', likesCount: 20 },
+  //   { id: '2', message: 'It\'s me', likesCount: 114 },
+  // ]
 
-  let postsElement = postsData.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />)
+  let postsElement = props.postsData.map(p => {
+    return <Post key={p.id} message={p.message} likesCount={p.likesCount} />
+  })
 
   return (
     <div className={s.postsBlock}>
