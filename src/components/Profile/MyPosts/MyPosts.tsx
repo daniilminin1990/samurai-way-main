@@ -5,6 +5,7 @@ import { PostsDataProps } from "../../../redux/state";
 
 type MyPostsProps = {
   postsData: PostsDataProps[],
+  addPost: (text: string) => void
 }
 
 const MyPosts = (props: MyPostsProps) => {
@@ -16,9 +17,8 @@ const MyPosts = (props: MyPostsProps) => {
   let newPostElement = useRef<HTMLTextAreaElement>(null)
 
   let addPost = () => {
-    debugger
-    let text = newPostElement.current?.value
-    alert(text)
+    let text = newPostElement.current?.value ?? ''
+    props.addPost(text)
   }
 
   return (

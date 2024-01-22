@@ -27,7 +27,6 @@ export type StateType = {
   dialogsPage: DialogsPageType,
 }
 
-
 let state: StateType = {
   profilePage: {
     posts: [
@@ -56,5 +55,14 @@ let state: StateType = {
     ]
   }
 }
+
+export let addPost = (postMessage: string) => {
+  let newPost: PostsDataProps = {
+    id: '5',
+    message: postMessage,
+    likesCount: 123,
+  };
+  state.profilePage.posts.push(newPost)
+};
 
 export default state
