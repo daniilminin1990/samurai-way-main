@@ -61,7 +61,7 @@ export let addPost = (postMessage: string) => {
   let newPost: PostsDataProps = {
     id: '5',
     message: postMessage,
-    likesCount: 123,
+    likesCount: 0,
   };
   state.profilePage.posts.push(newPost)
   rerenderEntireTree(state)
