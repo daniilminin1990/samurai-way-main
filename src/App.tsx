@@ -10,7 +10,8 @@ import { StateType } from './redux/state';
 
 type AppProps = {
   state: StateType,
-  addPost: (text: string) => void
+  addPost: () => void
+  updateNewPostText: (text: string) => void
 }
 
 function App(props: AppProps) {
@@ -25,8 +26,11 @@ function App(props: AppProps) {
               state={props.state.dialogsPage} />} />
           <Route path='/profile'
             render={() => <Profile
-              state={props.state.profilePage}
-              addPost={props.addPost} />} />
+              profilePage={props.state.profilePage}
+              addPost={props.addPost}
+              updateNewPostText={props.updateNewPostText}
+            />}
+          />
         </div>
       </div>
     </BrowserRouter>

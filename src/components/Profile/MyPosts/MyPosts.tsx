@@ -5,7 +5,9 @@ import { PostsDataProps } from "../../../redux/state";
 
 type MyPostsProps = {
   postsData: PostsDataProps[],
-  addPost: (text: string) => void
+  newPostText: string,
+  addPost: () => void
+  updateNewPostText: (text: string) => void
 }
 
 const MyPosts = (props: MyPostsProps) => {
@@ -19,17 +21,20 @@ const MyPosts = (props: MyPostsProps) => {
   let newPostElement = useRef<HTMLTextAreaElement>(null)
 
   let addPost = () => {
-    props.addPost(newPost)
-    setNewPost('')
+    props.addPost()
   }
   // let addPost = () => {
-  //   let text = newPostElement.current!.value ?? ''
-  //   props.addPost(text)
-  //   newPostElement.current!.value = ''
+  //   props.addPost(newPost)
+  //   setNewPost('')
   // }
 
-  let onNewTitleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setNewPost(e.currentTarget.value)
+  // let onNewTitleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  //   setNewPost(e.currentTarget.value)
+  // }
+
+  let onPostChange = () => {
+    let text = newPostElement.current!.value ?? ''
+    props.updateNewPostText(text)
   }
   return (
     <div className={s.postsBlock}>
@@ -37,8 +42,12 @@ const MyPosts = (props: MyPostsProps) => {
       <div>
         <div>
           <textarea
-            // ref={newPostElement} 
-            value={newPost} onChange={onNewTitleChange}></textarea>
+            ref={newPostElement}
+            onChange={onPostChange}
+            value={props.newPostText}
+          // value={newPost}
+          // onChange={onNewTitleChange}
+          />
         </div>
 
         <div>
