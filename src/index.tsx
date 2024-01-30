@@ -6,9 +6,13 @@ import store, { StateType } from './redux/state'
 
 let rerenderEntireTree = (state: StateType) => {
   ReactDOM.render(
-    <App state={store.getState()}
-      addPost={store.addPost}
-      updateNewPostText={store.updateNewPostText}
+    <App
+      // я не знаю зачем он здесь поменял вот так. Откуда этот state берется???
+      // Аа, он берется из вызова rerenderEntireTree внизу страницы
+      state={state}
+      //state={store.getState()}
+      addPost={store.addPost.bind(store)}
+      updateNewPostText={store.updateNewPostText.bind(store)}
     />,
     document.getElementById('root')
   );
