@@ -36,6 +36,7 @@ export type StoreType = {
   subscribe: (observer:(state: StateType) => void) => void
   dispatch: (action: ActionTypes) => void
 }
+// 
 
 type CallSubscriberType = (state: StateType) => void;
 
