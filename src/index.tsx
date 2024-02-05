@@ -11,8 +11,10 @@ let rerenderEntireTree = (state: StateType) => {
       // Аа, он берется из вызова rerenderEntireTree внизу страницы
       state={state}
       //state={store.getState()}
-      addPost={store.addPost.bind(store)}
-      updateNewPostText={store.updateNewPostText.bind(store)}
+
+      // addPost={store.addPost.bind(store)}
+      // updateNewPostText={store.updateNewPostText.bind(store)}
+      dispatch={store.dispatch.bind(store)}
     />,
     document.getElementById('root')
   );
