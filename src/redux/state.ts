@@ -37,15 +37,26 @@ export type StoreType = {
 
 type CallSubscriberType = (state: StateType) => void;
 
-type AddPostActionType = {
-  type: 'ADD-POST',
-}
-type UpdateNewPostTextActionType = {
-  type: 'UPDATE-NEW-POST-TEXT',
-  newText: string
-}
+// type AddPostActionType = {
+//   type: 'ADD-POST',
+// }
+type AddPostActionType = ReturnType<typeof addPostActionCreator> 
+type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostActionCreator>
 
 export type ActionTypes = AddPostActionType | UpdateNewPostTextActionType
+
+// export const addPostActionCreator = (): AddPostActionType => {
+export const addPostActionCreator = () => {
+  return {
+    type: 'ADD-POST',
+  } as const
+}
+export const updateNewPostActionCreator = (text: string) => {
+  return {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: text
+  } as const
+}
 
 let store: StoreType = {
   _state: {
