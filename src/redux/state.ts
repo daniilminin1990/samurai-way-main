@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
+const SEND_MESSAGE = 'SEND-MESSAGE'
+
 export type DialogsDataProps = {
   id: string,
   name: string
@@ -20,6 +25,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
   messages: MessagesDataProps[]
   dialogs: DialogsDataProps[],
+  newMessageBody: string
 }
 
 export type StateType = {
@@ -42,19 +48,35 @@ type CallSubscriberType = (state: StateType) => void;
 // }
 type AddPostActionType = ReturnType<typeof addPostActionCreator> 
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostActionCreator>
+type SendMessageCreatorType = ReturnType<typeof sendMessageCreator>
+type UpdateNewMessageBodyCreatorType = ReturnType<typeof updateNewMessageBodyCreator>
 
-export type ActionTypes = AddPostActionType | UpdateNewPostTextActionType
+export type ActionTypes = AddPostActionType 
+      | UpdateNewPostTextActionType 
+      | SendMessageCreatorType 
+      | UpdateNewMessageBodyCreatorType
 
 // export const addPostActionCreator = (): AddPostActionType => {
 export const addPostActionCreator = () => {
   return {
-    type: 'ADD-POST',
+    type: ADD_POST,
   } as const
 }
 export const updateNewPostActionCreator = (text: string) => {
   return {
-    type: 'UPDATE-NEW-POST-TEXT',
+    type: UPDATE_NEW_POST_TEXT,
     newText: text
+  } as const
+}
+export const sendMessageCreator = () => {
+  return {
+    type: SEND_MESSAGE,
+  } as const
+}
+export const updateNewMessageBodyCreator = (body: string) => {
+  return {
+    type: UPDATE_NEW_MESSAGE_BODY,
+    body: body
   } as const
 }
 
@@ -85,7 +107,8 @@ let store: StoreType = {
         { id: '4', name: 'Victor', },
         { id: '5', name: 'Elena', },
         { id: '6', name: 'Valery', },
-      ]
+      ],
+      newMessageBody: '',
     }
   },
   _callSubscriber() {
@@ -100,7 +123,7 @@ let store: StoreType = {
   },
 
   dispatch (action) {
-    if(action.type === 'ADD-POST'){
+    if(action.type === ADD_POST){
       let newPost: PostsDataProps = {
         id: '5',
         message: this._state.profilePage.newPostText,
@@ -109,8 +132,16 @@ let store: StoreType = {
       this._state.profilePage.posts.push(newPost)
       this._state.profilePage.newPostText = ''
       this._callSubscriber(this._state)
-    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+    } else if (action.type === UPDATE_NEW_POST_TEXT) {
       this._state.profilePage.newPostText = action.newText
+      this._callSubscriber(this._state)
+    } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+      this._state.dialogsPage.newMessageBody = action.body;
+      this._callSubscriber(this._state)
+    } else if (action.type === SEND_MESSAGE) {
+      let body = this._state.dialogsPage.newMessageBody;
+      this._state.dialogsPage.newMessageBody = '';
+      this._state.dialogsPage.messages.push({id: '7', message: body});
       this._callSubscriber(this._state)
     }
 

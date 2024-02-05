@@ -5,10 +5,11 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile, { ProfileProps } from "./components/Profile/Profile";
 import Dialogs from './components/Dialogs/Dialogs';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { ActionTypes, StateType } from './redux/state';
+import { ActionTypes, StateType, StoreType } from './redux/state';
 
 type AppProps = {
   state: StateType,
+  store: StoreType
   dispatch: (action: ActionTypes) => void
 }
 
@@ -21,7 +22,7 @@ function App(props: AppProps) {
         <div className='app-wrapper-content'>
           <Route path='/dialogs'
             render={() => <Dialogs
-              state={props.state.dialogsPage} />} />
+              store={props.store} />} />
           <Route path='/profile'
             render={() => <Profile
               profilePage={props.state.profilePage}
