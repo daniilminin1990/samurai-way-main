@@ -12,8 +12,6 @@ let rerenderEntireTree = (state: StateType) => {
       state={state}
       //state={store.getState()}
 
-      // addPost={store.addPost.bind(store)}
-      // updateNewPostText={store.updateNewPostText.bind(store)}
       dispatch={store.dispatch.bind(store)}
     />,
     document.getElementById('root')

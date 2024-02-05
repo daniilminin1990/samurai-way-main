@@ -6,14 +6,10 @@ import { ActionTypes, PostsDataProps } from "../../../redux/state";
 type MyPostsProps = {
   postsData: PostsDataProps[],
   newPostText: string,
-  // addPost: () => void
-  // updateNewPostText: (text: string) => void
   dispatch: (action: ActionTypes) => void
 }
 
 const MyPosts = (props: MyPostsProps) => {
-
-  const [newPost, setNewPost] = useState<string>('')
 
   let postsElement = props.postsData.map(p => {
     return <Post key={p.id} message={p.message} likesCount={p.likesCount} />
@@ -22,21 +18,11 @@ const MyPosts = (props: MyPostsProps) => {
   let newPostElement = useRef<HTMLTextAreaElement>(null)
 
   let addPost = () => {
-    // props.addPost()
     props.dispatch({ type: 'ADD-POST' })
   }
-  // let addPost = () => {
-  //   props.addPost(newPost)
-  //   setNewPost('')
-  // }
-
-  // let onNewTitleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-  //   setNewPost(e.currentTarget.value)
-  // }
 
   let onPostChange = () => {
     let text = newPostElement.current!.value ?? ''
-    // props.updateNewPostText(text)
     props.dispatch({ type: 'UPDATE-NEW-POST-TEXT', newText: text })
   }
   return (
@@ -48,8 +34,6 @@ const MyPosts = (props: MyPostsProps) => {
             ref={newPostElement}
             onChange={onPostChange}
             value={props.newPostText}
-          // value={newPost}
-          // onChange={onNewTitleChange}
           />
         </div>
 
